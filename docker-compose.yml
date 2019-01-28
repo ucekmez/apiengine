@@ -1,0 +1,40 @@
+version: '3'
+
+services:
+    apienginemongo:
+      image: mongo
+      container_name: "apienginemongo"
+      networks:
+        - cockpit
+      expose:
+        - 27017
+      volumes:
+        - 'mongo-vol:/data/db'
+
+    apiengine:
+      image: ucekmez/apiengine
+      container_name: "apiengine"
+      build:
+        context: .
+        dockerfile: Dockerfile
+      networks:
+        - cockpit
+      expose:
+        - 3000
+      ports:
+        - 3000:80
+      depends_on:
+        - apienginemongo
+      environment:
+        COCKPIT_SESSION_NAME: cockpit
+        COCKPIT_SALT: f99ba7a06623087d02876811e40e4e6c
+        COCKPIT_DATABASE_SERVER: 'mongodb://apienginemongo:27017'
+        COCKPIT_DATABASE_NAME: apiengine_master
+
+
+networks:
+  cockpit:
+    driver: bridge
+
+volumes:
+    mongo-vol: null
