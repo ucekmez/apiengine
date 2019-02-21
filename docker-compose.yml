@@ -9,7 +9,7 @@ services:
       expose:
         - 27017
       volumes:
-        - 'mongo-vol:/data/db'
+        - mongo-vol:/data/db
 
     apiengine:
       image: ucekmez/apiengine
@@ -20,9 +20,9 @@ services:
       networks:
         - cockpit
       expose:
-        - 3000
+        - 3001
       ports:
-        - 3000:80
+        - 3001:80
       depends_on:
         - apienginemongo
       environment:
@@ -30,6 +30,9 @@ services:
         COCKPIT_SALT: f99ba7a06623087d02876811e40e4e6c
         COCKPIT_DATABASE_SERVER: 'mongodb://apienginemongo:27017'
         COCKPIT_DATABASE_NAME: apiengine_master
+      volumes:
+        - apiengine-storage:/var/www/html/storage
+
 
 
 networks:
@@ -38,3 +41,4 @@ networks:
 
 volumes:
     mongo-vol: null
+    apiengine-storage: null

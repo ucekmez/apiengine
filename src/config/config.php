@@ -21,6 +21,38 @@ if (!empty(getenv('COCKPIT_DATABASE_SERVER'))){
   ];
 }
 
+
+
+$configs['groups'] = [
+    'author' => [
+        '$admin' => false,
+        'collections' => [
+            'manage' => true
+        ],
+        'cockpit' => [
+            'backend' => true,
+            'finder' => true
+        ],
+        '$vars' => [
+            'finder.path' => '/storage/upload'
+        ]
+    ]
+];
+
+$configs['languages'] = [
+    'tr' => 'Turkish',
+    'en' => 'English'
+];
+
+$configs['cors'] = [
+  'allowedHeaders' => 'X-Requested-With, Content-Type, Origin, Cache-Control, Pragma, Authorization, Accept, Accept-Encoding, Cockpit-Token',
+  'allowedMethods' => 'PUT, POST, GET, OPTIONS, DELETE',
+  'allowedOrigins' => '*',
+  'maxAge' => '1000',
+  'allowCredentials' => 'true',
+  'exposedHeaders' => 'true',
+];
+
 if (!empty(getenv('COCKPIT_MAILER_FROM'))){
   $configs['mailer'] = [
       "from"      => getenv('COCKPIT_MAILER_FROM'),
@@ -33,4 +65,5 @@ if (!empty(getenv('COCKPIT_MAILER_FROM'))){
       "encryption"=> getenv('COCKPIT_MAILER_ENCRYPTION')
   ];
 }
+
 return $configs;

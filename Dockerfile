@@ -28,5 +28,9 @@ RUN echo "\nphp_value  upload_max_filesize 256M" >> /var/www/html/.htaccess
 
 COPY src /var/www/html/
 RUN chown -R www-data:www-data /var/www/html
+ADD run /usr/local/bin/run
+RUN chmod 777 /usr/local/bin/run
 
 VOLUME ["/var/www/html/storage", "/var/www/html/config"]
+
+RUN /bin/sh /usr/local/bin/run
