@@ -6,13 +6,11 @@ Start a container with:
 
 
 # Build  
-docker build -t agentejo/cockpit:latest .
+docker build -t ucekmez/apiengine .
 
-# Update Repo
-docker push agentejo/cockpit
 
 # Run
-docker run -p 8080:80 agentejo/cockpit:latest
+docker run -p 8080:80 ucekmez/apiengine
 
 # Cleanup
-docker rmi $(docker images -f "dangling=true" -q) agentejo/cockpit:latest -f
+docker rmi $(docker images -f "dangling=true" -q) ucekmez/apiengine -f
