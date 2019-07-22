@@ -1,11 +1,11 @@
-FROM php:7-apache
+FROM php:7.3-apache-stretch
 
 ARG COCKPIT_VERSION="next"
 
-RUN apt-get update \
-    && apt-get install -y \
-	wget zip unzip \
-        libfreetype6-dev \
+RUN apt-get update
+RUN apt-get install -y libfreetype6-dev
+RUN apt-get install -y \
+	      wget zip unzip \
         libjpeg62-turbo-dev \
         libpng-dev \
         sqlite3 libsqlite3-dev \
